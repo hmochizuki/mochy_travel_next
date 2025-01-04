@@ -13,8 +13,10 @@ export const createClient = async () => {
         getAll() {
           return cookieStore.getAll();
         },
-        setAll() {
-          return 
+        setAll(cookiesToSet) {
+          for (const { name, value, options } of cookiesToSet) {
+            cookieStore.set(name, value, options);
+          }
         },
       },
     },
