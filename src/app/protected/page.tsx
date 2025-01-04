@@ -1,6 +1,4 @@
-import { IconButton } from "@/components/ui/iconButton";
 import { createClient } from "@/utils/supabase/server";
-import { PlusIcon } from "lucide-react";
 import { redirect } from "next/navigation";
 import { CreateTravelDialog } from "./CreateTravelDialog";
 
