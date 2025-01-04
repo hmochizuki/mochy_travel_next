@@ -169,7 +169,6 @@ export async function generateAndUploadHandbook(travelId: string) {
   });
 
   const filePath = await uploadHandbookPDF(travelId, pdfBuffer);
-  console.log("filePath", filePath);
 
   const { error } = await supabase
     .from("travel_handbook")
