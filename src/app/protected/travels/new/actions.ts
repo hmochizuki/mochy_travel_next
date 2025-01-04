@@ -29,7 +29,7 @@ export const createTravelAction = async (formData: FormData) => {
     );
   }
 
-  const { data, error } = await supabase.from("travels").insert([{ travel_name, created_by: user?.id }]);
+  const { error } = await supabase.from("travels").insert([{ travel_name, created_by: user?.id }]);
 
   if (error) {
     console.error("Error creating travel plan:", error);
