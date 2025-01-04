@@ -1,16 +1,12 @@
 "use client";
 
+import type { TravelEvent } from "@/types/travelEvent";
 import { format } from "date-fns";
 import { useRouter } from "next/navigation";
 
 type Props = {
   date: string;
-  events: {
-    event_id: string;
-    start_time: string;
-    end_time: string;
-    event_name: string;
-  }[];
+  events: Pick<TravelEvent, "event_id" | "start_time" | "end_time" | "event_name">[];
   travelId: string;
 };
 
