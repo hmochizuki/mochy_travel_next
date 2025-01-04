@@ -1,6 +1,7 @@
 "use client";
 
 import { format } from "date-fns";
+import { useRouter } from "next/navigation";
 
 type Props = {
   date: string;
@@ -10,12 +11,16 @@ type Props = {
     end_time: string;
     event_name: string;
   }[];
+  travelId: string;
 };
 
 export default function TravelEventsCard({
   date,
   events,
+  travelId,
 }: Props) {
+  const router = useRouter();
+
   return (
     <div key={date} className="border rounded-lg p-4 shadow w-full">
       <h2 className="text-xl font-bold mb-2">
@@ -24,7 +29,13 @@ export default function TravelEventsCard({
       <ul>
         {events.map((event) => (
           <li key={event.event_id} className="mb-1">
-            <div className="grid grid-cols-[100px_auto] items-center gap-4">
+            <button
+              type="button"
+              onClick={() => {
+                router.push(`/protected/travels/${travelId}/events/${event.event_id}`);
+              }}
+              className="grid grid-cols-[100px_auto] items-center gap-4"
+            >
               <p className="text-sm text-left">
                 <span className="block text-gray-500">
                   {event.start_time || "未定"}
@@ -34,7 +45,7 @@ export default function TravelEventsCard({
                 </span>
               </p>
               <span className="text-left font-medium">{event.event_name}</span>
-            </div>
+            </button>
           </li>
         ))}
       </ul>

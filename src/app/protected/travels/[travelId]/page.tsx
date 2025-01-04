@@ -44,7 +44,12 @@ export default async function TravelPage({ params }: { params: Params }) {
       {eventsByDate && Object.keys(eventsByDate).length > 0 ? (
         <>
           {Object.entries(eventsByDate).map(([date, events]) => (
-            <TravelEventsCard key={date} date={date} events={events} />
+            <TravelEventsCard
+              key={date}
+              date={date}
+              events={events}
+              travelId={travelId}
+            />
           ))}
         </>
       ) : (
