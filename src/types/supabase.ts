@@ -86,6 +86,35 @@ export type Database = {
           },
         ]
       }
+      travel_handbook: {
+        Row: {
+          created_at: string | null
+          pdf_file_path: string
+          travel_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          pdf_file_path: string
+          travel_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          pdf_file_path?: string
+          travel_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "travel_handbook_travel_id_fkey"
+            columns: ["travel_id"]
+            isOneToOne: true
+            referencedRelation: "travels"
+            referencedColumns: ["travel_id"]
+          },
+        ]
+      }
       travel_members: {
         Row: {
           joined_at: string | null
