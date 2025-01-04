@@ -1,6 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import NewTravelEventButton from "./NewTravelEventButton";
-import { format, isValid } from "date-fns";
+import TravelEventsCard from "./TravelEventsCard";
 
 type Params = Promise<{
   travelId: string;
@@ -44,32 +44,7 @@ export default async function TravelPage({ params }: { params: Params }) {
       {eventsByDate && Object.keys(eventsByDate).length > 0 ? (
         <>
           {Object.entries(eventsByDate).map(([date, events]) => (
-            <div key={date} className="border rounded-lg p-4 shadow w-full">
-              <h2 className="text-xl font-bold mb-2">
-                {date !== "未定"
-                  ? format(new Date(date), "yyyy年MM月dd日")
-                  : "未定"}
-              </h2>
-              <ul>
-                {events.map((event) => (
-                  <li key={event.event_id} className="mb-1">
-                    <div className="grid grid-cols-[100px_auto] items-center gap-4">
-                      <p className="text-sm text-left">
-                        <span className="block text-gray-500">
-                          {event.start_time || "未定"}
-                        </span>
-                        <span className="block text-gray-500">
-                          ~ {event.end_time || "未定"}
-                        </span>
-                      </p>
-                      <span className="text-left font-medium">
-                        {event.event_name}
-                      </span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <TravelEventsCard key={date} date={date} events={events} />
           ))}
         </>
       ) : (
