@@ -5,7 +5,7 @@ import TravelCard from "./travelCard";
 
 export default async function ProtectedPage() {
 	const supabase = await createClient();
-	const { data: travels } = await supabase.from("travels").select();
+	const { data: travels } = await supabase.from("travels").select().order("created_at", { ascending: false });
 
 	const {
 		data: { user },
