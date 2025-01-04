@@ -9,21 +9,6 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      countries: {
-        Row: {
-          id: number
-          name: string
-        }
-        Insert: {
-          id?: never
-          name: string
-        }
-        Update: {
-          id?: never
-          name?: string
-        }
-        Relationships: []
-      }
       profiles: {
         Row: {
           first_name: string | null
@@ -42,29 +27,61 @@ export type Database = {
         }
         Relationships: []
       }
-      travel: {
+      travel_events: {
         Row: {
+          cost: number | null
           created_at: string | null
-          created_by: string
-          profile_image_url: string | null
+          description: string
+          end_date: string | null
+          end_time: string | null
+          event_id: string
+          event_name: string
+          event_type: string
+          location: string
+          start_date: string | null
+          start_time: string | null
           travel_id: string
-          travel_name: string
+          url: string
         }
         Insert: {
+          cost?: number | null
           created_at?: string | null
-          created_by: string
-          profile_image_url?: string | null
-          travel_id?: string
-          travel_name: string
+          description?: string
+          end_date?: string | null
+          end_time?: string | null
+          event_id?: string
+          event_name?: string
+          event_type: string
+          location?: string
+          start_date?: string | null
+          start_time?: string | null
+          travel_id: string
+          url?: string
         }
         Update: {
+          cost?: number | null
           created_at?: string | null
-          created_by?: string
-          profile_image_url?: string | null
+          description?: string
+          end_date?: string | null
+          end_time?: string | null
+          event_id?: string
+          event_name?: string
+          event_type?: string
+          location?: string
+          start_date?: string | null
+          start_time?: string | null
           travel_id?: string
-          travel_name?: string
+          url?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "travel_events_travel_id_fkey"
+            columns: ["travel_id"]
+            isOneToOne: false
+            referencedRelation: "travels"
+            referencedColumns: ["travel_id"]
+          },
+        ]
       }
       travel_members: {
         Row: {
@@ -90,10 +107,37 @@ export type Database = {
             foreignKeyName: "travel_members_travel_id_fkey"
             columns: ["travel_id"]
             isOneToOne: false
-            referencedRelation: "travel"
+            referencedRelation: "travels"
             referencedColumns: ["travel_id"]
           },
         ]
+      }
+      travels: {
+        Row: {
+          created_at: string | null
+          created_by: string
+          created_user_name: string | null
+          profile_image_url: string | null
+          travel_id: string
+          travel_name: string
+        }
+        Insert: {
+          created_at?: string | null
+          created_by: string
+          created_user_name?: string | null
+          profile_image_url?: string | null
+          travel_id?: string
+          travel_name: string
+        }
+        Update: {
+          created_at?: string | null
+          created_by?: string
+          created_user_name?: string | null
+          profile_image_url?: string | null
+          travel_id?: string
+          travel_name?: string
+        }
+        Relationships: []
       }
     }
     Views: {
