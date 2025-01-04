@@ -29,12 +29,30 @@ export const createTravelAction = async (formData: FormData) => {
     );
   }
 
-  const { error } = await supabase.from("travels").insert([{ travel_name, created_by: user?.id }]);
+  try {
+    // TODO: トランザクション処理にする。supabaseクライアントがトランザクションを提供してないため工夫が必要。
+    const { data: travelData, error: travelError } = await supabase
+      .from("travels")
+      .insert([{ travel_name, created_by: user.id }])
+      .select("travel_id")
+      .single();
 
-  if (error) {
-    console.error("Error creating travel plan:", error);
+    if (travelError) throw travelError;
+
+    const { error: memberError } = await supabase.from("travel_members").insert([
+      {
+        travel_id: travelData.travel_id,
+        user_id: user.id,
+        role: "owner",
+      },
+    ]);
+    if (memberError) throw memberError;
+  } catch (error) {
+    console.error("Transaction error:", error);
+    if (!(error instanceof Error)) {
+      return encodedRedirect("error", "/protected/travels/new", "Unknown error");
+    }
     return encodedRedirect("error", "/protected/travels/new", error.message);
   }
-
-  return redirect("/protected/travels");
+  return redirect("/protected");
 };
