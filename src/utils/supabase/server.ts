@@ -1,6 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
+// クライアント作成
 export const createClient = async () => {
   const cookieStore = await cookies();
 
@@ -12,12 +13,18 @@ export const createClient = async () => {
         getAll() {
           return cookieStore.getAll();
         },
-				async setAll(cookies) {
-					for (const { name, value, options } of cookies) {
-						cookieStore.set(name, value, options);
-					}
-				},
+        setAll() {
+          return 
+        },
       },
     },
   );
+};
+
+export const setAuthCookies = async (cookiesToSet: Array<{ name: string; value: string; options?: any }>) => {
+  const cookieStore = await cookies();
+
+  for (const { name, value, options } of cookiesToSet) {
+    cookieStore.set(name, value, options);
+  }
 };
