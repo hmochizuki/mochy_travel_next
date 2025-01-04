@@ -40,7 +40,7 @@ export default async function TravelPage({ params }: { params: Params }) {
   );
 
   return (
-    <div className="flex-1 w-[90dvw] flex flex-col gap-12">
+    <div className="flex-1 w-[90dvw] flex flex-col gap-4">
       {eventsByDate && Object.keys(eventsByDate).length > 0 ? (
         <>
           {Object.entries(eventsByDate).map(([date, events]) => (
