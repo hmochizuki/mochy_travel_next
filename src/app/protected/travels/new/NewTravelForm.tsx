@@ -9,15 +9,8 @@ export default function TravelForm() {
       <form action={createTravelAction}>
         <input
           type="text"
-          name="title"
+          name="travel_name"
           placeholder="タイトル"
-          defaultValue=""
-          className="mb-4 w-full px-3 py-2 border rounded"
-        />
-        <input
-          type="text"
-          name="description"
-          placeholder="説明"
           defaultValue=""
           className="mb-4 w-full px-3 py-2 border rounded"
         />
