@@ -30,7 +30,7 @@ export default function TravelEventsCard({
               onClick={() => {
                 router.push(`/protected/travels/${travelId}/events/${event.event_id}`);
               }}
-              className="grid grid-cols-[100px_auto] items-center gap-4"
+              className="grid grid-cols-[100px_auto] items-center gap-4 w-full"
             >
               <p className="text-sm text-left">
                 <span className="block text-gray-500">
