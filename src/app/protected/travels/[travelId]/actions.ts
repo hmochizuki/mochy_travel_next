@@ -35,8 +35,8 @@ export async function createTravelHandbookPDF(travelData: TravelData) {
   
   pdfDoc.registerFontkit(fontkit);
   // 日本語フォントを埋め込み
-  const regularFontBytes = await loadFont("Roboto-Regular.ttf");
-  const boldFontBytes = await loadFont("Roboto-Bold.ttf");
+  const regularFontBytes = await loadFont("NotoSansJP-Regular.ttf");
+  const boldFontBytes = await loadFont("NotoSansJP-Bold.ttf");
 
   const regularFont = await pdfDoc.embedFont(regularFontBytes);
   const boldFont = await pdfDoc.embedFont(boldFontBytes);
