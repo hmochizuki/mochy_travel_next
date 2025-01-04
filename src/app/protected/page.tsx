@@ -1,6 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { CreateTravelDialog } from "./createTravelDialog";
+import { CreateTravelDialog } from "./CreateTravelDialog";
 import TravelCard from "./travelCard";
 
 export default async function ProtectedPage() {
