@@ -23,15 +23,15 @@ export const createTravelEventAction = async (
   }
 
   const eventName = formData.get("eventName")?.toString();
-  const startDate = formData.get("startDate")?.toString();
-  const startTime = formData.get("startTime")?.toString();
-  const endDate = formData.get("endDate")?.toString();
-  const endTime = formData.get("endTime")?.toString();
-  const eventType = formData.get("eventType")?.toString();
-  const location = formData.get("location")?.toString();
-  const description = formData.get("description")?.toString();
-  const url = formData.get("url")?.toString();
-  const cost = formData.get("cost")?.toString();
+  const startDate = formData.get("startDate")?.toString() || null;
+  const startTime = formData.get("startTime")?.toString() || null;
+  const endDate = formData.get("endDate")?.toString() || null;
+  const endTime = formData.get("endTime")?.toString() || null;
+  const eventType = formData.get("eventType")?.toString() || null;
+  const location = formData.get("location")?.toString() || "";
+  const description = formData.get("description")?.toString() || "";
+  const url = formData.get("url")?.toString() || "";
+  const cost = formData.get("cost")?.toString() || null;
 
   if (!eventName) {
     return encodedRedirect(
@@ -55,7 +55,6 @@ export const createTravelEventAction = async (
         description: description,
         url: url,
         cost: cost,
-        created_by: user.id,
       },
     ]);
 

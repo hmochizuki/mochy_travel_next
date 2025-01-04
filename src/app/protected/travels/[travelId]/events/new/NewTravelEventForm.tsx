@@ -100,6 +100,7 @@ export default function NewTravelEventForm({ travelId }: { travelId: string }) {
           className="border p-2 rounded w-full"
         />
       </label>
+      {/* TODO: フローティングボタンにする */}
       <button type="submit" className="bg-blue-500 text-white p-2 rounded">
         イベントを作成
       </button>
