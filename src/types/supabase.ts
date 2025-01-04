@@ -31,12 +31,13 @@ export type Database = {
         Row: {
           cost: number | null
           created_at: string | null
+          created_by: string
           description: string
           end_date: string | null
           end_time: string | null
           event_id: string
           event_name: string
-          event_type: string
+          event_type: Database["public"]["Enums"]["event_type_enum"] | null
           location: string
           start_date: string | null
           start_time: string | null
@@ -46,12 +47,13 @@ export type Database = {
         Insert: {
           cost?: number | null
           created_at?: string | null
+          created_by?: string
           description?: string
           end_date?: string | null
           end_time?: string | null
           event_id?: string
           event_name?: string
-          event_type: string
+          event_type?: Database["public"]["Enums"]["event_type_enum"] | null
           location?: string
           start_date?: string | null
           start_time?: string | null
@@ -61,12 +63,13 @@ export type Database = {
         Update: {
           cost?: number | null
           created_at?: string | null
+          created_by?: string
           description?: string
           end_date?: string | null
           end_time?: string | null
           event_id?: string
           event_name?: string
-          event_type?: string
+          event_type?: Database["public"]["Enums"]["event_type_enum"] | null
           location?: string
           start_date?: string | null
           start_time?: string | null
@@ -147,7 +150,22 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      event_type_enum:
+        | "sightseeing"
+        | "entertainment"
+        | "experience"
+        | "food"
+        | "accommodation"
+        | "shopping"
+        | "walking"
+        | "car"
+        | "bus"
+        | "train"
+        | "shinkansen"
+        | "plane"
+        | "ship"
+        | "motorcycle"
+        | "bicycle"
     }
     CompositeTypes: {
       [_ in never]: never
