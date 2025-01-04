@@ -64,7 +64,7 @@ export default async function TravelPage({ params }: { params: Params }) {
         </div>
       )}
       <div className="fixed bottom-8 right-4 z-50 flex flex-col gap-2">
-        <CreateHandbookButton />
+        <CreateHandbookButton travelId={travelId} />
         <NewTravelEventButton />
       </div>
     </div>
