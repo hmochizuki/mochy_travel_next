@@ -1,5 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import EventDetail from "./eventDetail";
+import EditTravelEventButton from "./EditTravelEventButton";
 
 type Params = Promise<{
   travelId: string;
@@ -41,6 +42,7 @@ export default async function TravelEventPage({ params }: { params: Params }) {
   return (
     <div className="flex-1 w-[90dvw] flex flex-col gap-4">
       <EventDetail event={event} />
+      <EditTravelEventButton />
     </div>
   );
 }
