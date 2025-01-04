@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 export const createClient = async () => {
   const cookieStore = await cookies();
 
-  return createServerClient<Database, "public", Database["public"]>(
+  return createServerClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
     {
@@ -13,9 +13,13 @@ export const createClient = async () => {
         getAll() {
           return cookieStore.getAll();
         },
-        setAll(cookiesToSet) {
+        async setAll(cookiesToSet) {
           for (const { name, value, options } of cookiesToSet) {
-            cookieStore.set(name, value, options);
+            cookieStore.set(name, value, {
+              ...options,
+              secure: process.env.NODE_ENV === "production",
+              sameSite: "lax",
+            });
           }
         },
       },
