@@ -25,7 +25,6 @@ export default async function TravelPage({ params }: { params: Params }) {
     .eq("travel_id", travelId)
     .order("start_date", { ascending: true });
 
-  console.log(error);
   // 日付ごとにイベントをグループ化
   const eventsByDate = travelEvents?.reduce(
     (acc: Record<string, any[]>, event) => {
