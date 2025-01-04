@@ -2,6 +2,7 @@ import { IconButton } from "@/components/ui/iconButton";
 import { createClient } from "@/utils/supabase/server";
 import { PlusIcon } from "lucide-react";
 import { redirect } from "next/navigation";
+import { CreateTravelDialog } from "./CreateTravelDialog";
 
 export default async function ProtectedPage() {
 	const supabase = await createClient();
@@ -16,11 +17,7 @@ export default async function ProtectedPage() {
 
 	return (
 		<div className="flex-1 w-full flex flex-col gap-12">
-			<div className="fixed bottom-4 right-4 z-50">
-				<IconButton>
-					<PlusIcon />
-				</IconButton>
-			</div>
+			<CreateTravelDialog />
 		</div>
 	);
 }
