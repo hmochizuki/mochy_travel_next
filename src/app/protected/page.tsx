@@ -1,6 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { CreateTravelDialog } from "./createTravelDialog";
+import TravelCard from "./travelCard";
 
 export default async function ProtectedPage() {
 	const supabase = await createClient();
@@ -19,10 +20,7 @@ export default async function ProtectedPage() {
 			<CreateTravelDialog />
 			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 				{travels?.map((travel) => (
-					<div key={travel.id} className="bg-white shadow-md rounded-lg p-4">
-						<h2 className="text-xl font-bold mb-2">{travel.travel_name}</h2>
-						<p className="text-gray-600">Created by: {travel.created_by}</p>
-					</div>
+					<TravelCard key={travel.id} travelId={travel.id} travelName={travel.travel_name} createdBy={travel.created_by} />
 				))}
 			</div>
 		</div>
