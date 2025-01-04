@@ -3,7 +3,6 @@ import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import Link from "next/link";
 import "./globals.css";
-import { createClient } from "@/utils/supabase/server";
 
 const defaultUrl = process.env.VERCEL_URL
 	? `https://${process.env.VERCEL_URL}`
@@ -25,12 +24,6 @@ export default async function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	const supabase = await createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
 
 	return (
 		<html lang="en" className={geistSans.className} suppressHydrationWarning>
@@ -46,9 +39,10 @@ export default async function RootLayout({
 							<nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
 								<div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
 									<div className="flex gap-5 items-center font-semibold">
-										<Link href={ user ? "/protected" : "/"}>mochy travel</Link>
+										{/* TODO: リンクにする */}
+										{/* <Link href={ user ? "/protected" : "/"}>mochy travel</Link> */}
 									</div>
-									<HeaderAuth />
+									<HeaderAuth isSignedIn={false} />
 								</div>
 							</nav>
 							<div className="flex flex-col gap-2 max-w-5xl p-5">
