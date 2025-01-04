@@ -2,10 +2,13 @@ import { createClient } from "@/utils/supabase/server";
 import NewTravelEventButton from "./NewTravelEventButton";
 import TravelEventsCard from "./TravelEventsCard";
 import CreateHandbookButton from "./createHandbookButton";
+import type { TravelEvent } from "@/types/travelEvent";
 
 type Params = Promise<{
   travelId: string;
 }>;
+
+type TravelEvents = Pick<TravelEvent, "event_id" | "start_time" | "end_time" | "event_name">[];
 
 export default async function TravelPage({ params }: { params: Params }) {
   const supabase = await createClient();
@@ -26,9 +29,8 @@ export default async function TravelPage({ params }: { params: Params }) {
     .eq("travel_id", travelId)
     .order("start_date", { ascending: true });
 
-  // 日付ごとにイベントをグループ化
-  const eventsByDate = travelEvents?.reduce(
-    (acc: Record<string, any[]>, event) => {
+  const eventsByDate = travelEvents?.reduce<Record<string, TravelEvents>>(
+    (acc: Record<string, TravelEvents>, event) => {
       const date = event.start_date || "未定";
       if (!acc[date]) {
         acc[date] = [];
