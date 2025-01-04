@@ -1,6 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import NewTravelEventButton from "./NewTravelEventButton";
 import TravelEventsCard from "./TravelEventsCard";
+import CreateHandbookButton from "./createHandbookButton";
 
 type Params = Promise<{
   travelId: string;
@@ -60,7 +61,10 @@ export default async function TravelPage({ params }: { params: Params }) {
           </p>
         </div>
       )}
-      <NewTravelEventButton />
+      <div className="fixed bottom-8 right-4 z-50 flex flex-col gap-2">
+        <CreateHandbookButton />
+        <NewTravelEventButton />
+      </div>
     </div>
   );
 }
