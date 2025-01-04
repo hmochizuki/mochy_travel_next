@@ -22,6 +22,7 @@ type TravelData = {
 }
 
 
+// TODO: 関数の切り分け
 // 日本語フォントのロード関数
 async function loadFont(fileName: string) {
   const fontPath = path.resolve("public/fonts", fileName);
@@ -168,6 +169,7 @@ export async function generateAndUploadHandbook(travelId: string) {
   });
 
   const filePath = await uploadHandbookPDF(travelId, pdfBuffer);
+  console.log("filePath", filePath);
 
   const { error } = await supabase
     .from("travel_handbook")

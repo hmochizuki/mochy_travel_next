@@ -2,7 +2,7 @@
 
 import { IconButton } from "@/components/ui/iconButton";
 import { Notebook } from "lucide-react";
-import { generateAndUploadHandbook } from "./actions";
+import { generateAndUploadHandbook, getSignedHandbookURL } from "./actions";
 import { useState } from "react";
 
 export default function CreateHandbookButton({ travelId }: { travelId: string }) {
@@ -12,8 +12,10 @@ export default function CreateHandbookButton({ travelId }: { travelId: string })
     setIsSubmitting(true);
 
     try {
-      await generateAndUploadHandbook(travelId);
+      const filePath = await generateAndUploadHandbook(travelId);
+      const pdfUrl = await getSignedHandbookURL(filePath);
       alert("しおりが正常に生成されました！");
+      window.open(pdfUrl, "_blank");
     } catch (error) {
       console.error("Error:", error);
       alert("しおりの生成中にエラーが発生しました");
