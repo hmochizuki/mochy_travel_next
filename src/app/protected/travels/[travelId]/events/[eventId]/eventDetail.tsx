@@ -1,22 +1,8 @@
+import type { TravelEvent } from "@/types/travelEvent";
 import { Star } from "lucide-react";
 
 type EventDetailsProps = {
-  event: {
-    event_id: string;
-    travel_id: string;
-    event_name: string;
-    location: string;
-    description: string;
-    url: string;
-    start_date: string;
-    start_time: string;
-    end_date: string;
-    end_time: string;
-    cost: number;
-    created_at: string;
-    created_by: string;
-    event_type: string;
-  };
+  event: TravelEvent;
 };
 
 const EventSheet = ({ children }: React.PropsWithChildren) => {

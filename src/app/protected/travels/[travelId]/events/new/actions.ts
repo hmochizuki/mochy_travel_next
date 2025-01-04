@@ -1,5 +1,6 @@
 "use server";
 
+import type { TravelEventTypeEnum } from "@/types/travelEvent";
 import { createClient } from "@/utils/supabase/server";
 import { encodedRedirect } from "@/utils/utils";
 import { redirect } from "next/navigation";
@@ -27,7 +28,7 @@ export const createTravelEventAction = async (
   const startTime = formData.get("startTime")?.toString() || null;
   const endDate = formData.get("endDate")?.toString() || null;
   const endTime = formData.get("endTime")?.toString() || null;
-  const eventType = formData.get("eventType")?.toString() || null;
+  const eventType = (formData.get("eventType")?.toString() || null) as TravelEventTypeEnum | null;
   const location = formData.get("location")?.toString() || "";
   const description = formData.get("description")?.toString() || "";
   const url = formData.get("url")?.toString() || "";
@@ -42,8 +43,7 @@ export const createTravelEventAction = async (
   }
 
   try {
-    const { error: eventError } = await supabase.from("travel_events").insert([
-      {
+    const { error: eventError } = await supabase.from("travel_events").insert({
         travel_id: travelId,
         event_name: eventName,
         start_date: startDate,
@@ -54,9 +54,8 @@ export const createTravelEventAction = async (
         location: location,
         description: description,
         url: url,
-        cost: cost,
-      },
-    ]);
+        cost: cost ? Number(cost) : null,
+      });
 
     if (eventError) throw eventError;
   } catch (error) {
