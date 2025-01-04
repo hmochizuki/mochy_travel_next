@@ -23,7 +23,6 @@ const geistSans = Geist({
 export default async function RootLayout({
 	children,
 }: Readonly<{
-	isSignedIn: boolean;
 	children: React.ReactNode;
 }>) {
 	const supabase = await createClient();
