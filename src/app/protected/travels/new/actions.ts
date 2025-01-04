@@ -20,12 +20,15 @@ export const createTravelAction = async (formData: FormData) => {
   }
 
   const travel_name = formData.get("travel_name")?.toString();
+  const first_name = user.user_metadata.first_name;
+  const last_name = user.user_metadata.last_name;
 
+  // TODO: first_nameとlast_nameは必須を必須にする。
   if (!travel_name) {
     return encodedRedirect(
       "error",
       "/protected/travels/new",
-      "travel_name is required",
+      "required fields are required",
     );
   }
 
@@ -33,7 +36,7 @@ export const createTravelAction = async (formData: FormData) => {
     // TODO: トランザクション処理にする。supabaseクライアントがトランザクションを提供してないため工夫が必要。
     const { data: travelData, error: travelError } = await supabase
       .from("travels")
-      .insert([{ travel_name, created_by: user.id }])
+      .insert([{ travel_name, created_by: user.id, created_user_name: `${first_name} ${last_name}` }])
       .select("travel_id")
       .single();
 
@@ -47,6 +50,7 @@ export const createTravelAction = async (formData: FormData) => {
       },
     ]);
     if (memberError) throw memberError;
+
   } catch (error) {
     console.error("Transaction error:", error);
     if (!(error instanceof Error)) {
@@ -54,5 +58,6 @@ export const createTravelAction = async (formData: FormData) => {
     }
     return encodedRedirect("error", "/protected/travels/new", error.message);
   }
+
   return redirect("/protected");
 };
