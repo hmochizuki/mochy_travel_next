@@ -1,11 +1,12 @@
 "use client";
 
 import { Dialog } from "@/components/feedback/dialog";
+import { Button } from "@/components/ui/button";
 import { IconButton } from "@/components/ui/iconButton";
 import { PlusIcon } from "lucide-react";
 import { useState } from "react";
 
-export function CreateTravelDialog() {
+export const CreateTravelDialog = () => {
   const [isOpen, setIsOpen] = useState(false);
 
 	return (
@@ -16,8 +17,9 @@ export function CreateTravelDialog() {
 				</IconButton>
 			</div>
 		<Dialog isOpen={isOpen} onClose={() => {setIsOpen(false)}}>
-			<div>
-				<h1>Feedback</h1>
+			<div className="flex flex-col">
+				<h1 className="mb-4">新しい旅行プランを作成しますか？</h1>
+				<Button className="self-end">作成</Button>
 			</div>
 		</Dialog>
 		</>
