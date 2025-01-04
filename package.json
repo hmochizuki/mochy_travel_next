@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "biome lint",
     "fmt": "biome format",
-    "check": "biome check"
+    "check": "biome check",
+    "supabase:gen": "supabase gen types typescript --local > src/types/supabase.ts"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.1.3",
