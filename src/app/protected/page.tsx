@@ -1,6 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { CreateTravelDialog } from "./CreateTravelDialog";
+import { CreateTravelDialog } from "./createTravelDialog";
 
 export default async function ProtectedPage() {
 	const supabase = await createClient();
