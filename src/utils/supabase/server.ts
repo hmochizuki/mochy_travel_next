@@ -26,11 +26,3 @@ export const createClient = async () => {
     },
   );
 };
-
-export const setAuthCookies = async (cookiesToSet: Array<{ name: string; value: string; options?: any }>) => {
-  const cookieStore = await cookies();
-
-  for (const { name, value, options } of cookiesToSet) {
-    cookieStore.set(name, value, options);
-  }
-};
